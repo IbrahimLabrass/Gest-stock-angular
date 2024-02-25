@@ -1,0 +1,264 @@
+<app-accueil></app-accueil>
+<br>
+<br>
+
+
+
+
+  
+  <div nz-col nzSpan="24">
+
+    <nz-modal [(nzVisible)]="isVisible" [nzTitle]="titleTemplate2 " (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <div> <div>
+       
+        <nz-input-group nzAddOnAfter=" مدير الهيكل" style="flex: 1;">
+      
+          <select style="width: 100%; height: 30px;" id="fournisseur">
+            <option *ngFor="let structure of FournisseurList" required>{{structure.email}}</option>
+          </select>
+        </nz-input-group>
+      
+            </div>
+        </div>
+      <br>
+      <div> 
+        <nz-input-group nzAddOnAfter=" الاسم " >
+        <input nz-input  placeholder="الاسم" [(ngModel)]="nom" />
+       </nz-input-group>
+    </div>
+      <br>
+      <div>
+        <nz-input-group nzAddOnAfter=" موضوع " >
+
+        <input nz-input placeholder="موضوع" [(ngModel)]="sujet"  />
+      </nz-input-group>
+
+      </div>
+      <br>
+      <div>
+        <nz-input-group nzAddOnAfter=" تفصيل " >
+          <input nz-input placeholder="تفصيل" [(ngModel)]="detail"  />
+      </nz-input-group>
+    </div>
+      <br>
+
+     
+
+      <div><button mat-raised-button color="primary" (click)="AjoutFormulaire()">إضافة</button></div>
+
+    </nz-modal>
+    <ng-template #titleTemplate2>
+      <div style="text-align: center;">إضافة إستمارة</div>
+    </ng-template>
+
+    <nz-modal [(nzVisible)]="isVisible4" [nzTitle]="titleTemplate3 " (nzOnCancel)="handleCancel4()" (nzOnOk)="handleOk4()">
+      <div> <div>
+       
+        <nz-input-group nzAddOnAfter=" مدير الهيكل" style="flex: 1;">
+      
+          <select style="width: 100%; height: 30px;" id="fournisseur">
+            <option *ngFor="let structure of FournisseurList" required>{{structure.email}}</option>
+          </select>
+        </nz-input-group>
+      
+            </div>
+        </div>
+      <br>
+      <div> 
+        <nz-input-group nzAddOnAfter=" الاسم " >
+        <input nz-input  placeholder="الاسم" [(ngModel)]="nom" />
+       </nz-input-group>
+    </div>
+      <br>
+      <div>
+        <nz-input-group nzAddOnAfter=" موضوع " >
+
+        <input nz-input placeholder="موضوع" [(ngModel)]="sujet"  />
+      </nz-input-group>
+
+      </div>
+      <br>
+      <div>
+        <nz-input-group nzAddOnAfter=" تفصيل " >
+          <input nz-input placeholder="تفصيل" [(ngModel)]="detail"  />
+      </nz-input-group>
+    </div>
+      <br>
+
+     
+
+      <div><button mat-raised-button color="primary" (click)="AjoutFormulaire()">إضافة</button></div>
+
+    </nz-modal>
+    <ng-template #titleTemplate3>
+      <div style="text-align: center;">تعديل إستمارة</div>
+    </ng-template>
+  </div>
+  
+
+<div nz-row>
+  
+
+
+  <div nz-col nzSpan="24" >
+    <mat-card >
+     <div style="text-align: center;"><h2><b> قائمة الاستمارات </b></h2></div>
+    <nz-table #basicTable [nzData]="listOfData" style="text-align: center;" [nzPageSize]="4">
+      <thead>
+      <tr>
+        <th><b>حذف</b></th>
+        <th><b>تعديل</b></th>
+        <th><b>المعطيات المحفوظة</b></th>
+        <th><b>التصميم</b></th>
+        <th><b>الخصائص</b></th>
+        <th><b>الموضوع</b></th>
+        <th><b>الاسم</b></th>
+        <th><b>الهيكل</b></th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td> <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteF(data.id)"><span style="color: red ;" class="material-icons" >restore_from_trash</span></a>          <nz-divider nzType="vertical"></nz-divider>
+        </td>
+        <td><a (click)="showModal4()" > <span style="color: red ;" class="material-icons" >
+          update
+          </span></a></td>
+        <td><a nz-popover  nzPopoverContent="Les formulaires" ><i nz-icon nzType="unordered-list"  style="font-size: 20px; color: #08c;" nzTheme="outline" (click)="voirInput(data.id)"></i></a>
+        </td>
+
+        <td>
+         
+
+        </td>
+
+        <td><a nz-popover nzPopoverContent="{{data.descFormulaire}}" ><i nz-icon   style="font-size: 20px; color: #08c;" nzType="eye" nzTheme="outline"></i></a></td>
+
+        <td>{{ data.sujetFormulaire }}</td>
+
+        <td>{{ data.nameFormulaire }}</td>
+        <td >{{ data.structure }}</td>
+
+      </tr>
+      </tbody>
+    </nz-table>
+    <button  (click)="showModal()"><b> إضافة إستمارة </b> </button>
+
+    </mat-card>
+  </div>
+
+</div>
+
+
+<div nz-col nzSpan="24" style="background: #ECECEC; padding: 30px;">
+  <nz-modal [(nzVisible)]="isVisible3" [nzTitle]="titleTemplate1 "(nzOnCancel)="handleCancel3()" (nzOnOk)="handleOk3()" nzWidth="800px">
+
+    <nz-table #basicTable1 [nzData]="listOfData1" >
+      <thead>
+      <tr>
+        <th><b>حذف</b></th>
+
+        <th><b>تعديل</b></th>
+        <th><b>البيان 3</b></th>
+        <th><b>البيان 2</b></th>
+        <th><b>البيان  1</b></th>
+        <th><b>التاريخ </b></th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable1.data">
+        <td><a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteInput(data.id)"><span style="color: red ;" class="material-icons" >restore_from_trash</span></a>          <nz-divider nzType="vertical"></nz-divider>
+        </td>
+        <td><a (click)="showModal5()" > <span style="color: red ;" class="material-icons" >
+          update
+          </span></a></td>
+        <td>{{ data.structure }}</td>
+        <td>{{ data.type }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.dateTemps }}</td>
+
+      </tr>
+      </tbody>
+      
+    </nz-table>
+    <div >
+    <button   (click)="showModal2()"><b> إضافة تصميم </b> </button>
+  </div>
+  </nz-modal>
+  <ng-template #titleTemplate1>
+    <div style="text-align: center;">المعطيات المحفوظة</div>
+  </ng-template>
+</div>
+
+
+<nz-modal [(nzVisible)]="isVisible1" nzTitle="تصميم النماذج" (nzOnCancel)="handleCancel1()" (nzOnOk)="handleOk1()">
+
+
+  <nz-table #basicTable2 [nzData]="listOfData1">
+
+    <tbody>
+    <tr *ngFor="let data of basicTable2.data">
+
+      <td> <input  nz-input type ="{{ data.type }}" name="{{ data.name }}" placeholder="{{ data.name }}" required="{{ data.required }}"></td>
+      <br>
+    </tr>
+    </tbody>
+  </nz-table>
+
+
+</nz-modal>
+
+
+<!-- add tasmim-->
+<nz-modal [(nzVisible)]="isVisible2" [nzTitle]="titleTemplate " (nzOnCancel)="handleCancel2()" (nzOnOk)="handleOk2()">
+
+  <div> <nz-select nzShowSearch nzAllowClear nzPlaceHolder="اختيار صنف " [(ngModel)]="typeInput">
+    <nz-option nzLabel="text" nzValue="text"></nz-option>
+    <nz-option nzLabel="number" nzValue="number"></nz-option>
+    <nz-option nzLabel="email" nzValue="email"></nz-option>
+    <nz-option nzLabel="tel" nzValue="tel"></nz-option>
+  </nz-select></div>
+  <br>
+
+  <div><input nz-input placeholder="الاسم" [(ngModel)]="nameInput" /></div>
+  <br>
+
+  <div> <nz-select nzShowSearch nzAllowClear nzPlaceHolder="required" [(ngModel)]="requiredInput">
+    <nz-option nzLabel="required" nzValue="required"></nz-option>
+    <nz-option nzLabel="not required" nzValue="not required"></nz-option>
+  </nz-select></div>
+  <br>
+
+  <div><button mat-raised-button color="primary" (click)="AjoutFormulaireSkeleton()">إضافة</button></div>
+
+</nz-modal>
+<ng-template #titleTemplate>
+  <div style="text-align: center;">إضافة تصميم</div>
+</ng-template>
+<!-- update tasmim-->
+<nz-modal [(nzVisible)]="isVisible5" [nzTitle]="titleTemplate5 " (nzOnCancel)="handleCancel5()" (nzOnOk)="handleOk5()">
+
+  <div> <nz-select nzShowSearch nzAllowClear nzPlaceHolder="اختيار صنف " [(ngModel)]="typeInput">
+    <nz-option nzLabel="text" nzValue="text"></nz-option>
+    <nz-option nzLabel="number" nzValue="number"></nz-option>
+    <nz-option nzLabel="email" nzValue="email"></nz-option>
+    <nz-option nzLabel="tel" nzValue="tel"></nz-option>
+  </nz-select></div>
+  <br>
+
+  <div><input nz-input placeholder="الاسم" [(ngModel)]="nameInput" /></div>
+  <br>
+
+  <div> <nz-select nzShowSearch nzAllowClear nzPlaceHolder="required" [(ngModel)]="requiredInput">
+    <nz-option nzLabel="required" nzValue="required"></nz-option>
+    <nz-option nzLabel="not required" nzValue="not required"></nz-option>
+  </nz-select></div>
+  <br>
+
+  <div><button mat-raised-button color="primary" (click)="AjoutFormulaireSkeleton()">إضافة</button></div>
+
+</nz-modal>
+<ng-template #titleTemplate5>
+  <div style="text-align: center;">تعديل تصميم</div>
+</ng-template>

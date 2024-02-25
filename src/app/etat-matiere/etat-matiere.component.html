@@ -1,0 +1,365 @@
+<app-accueil></app-accueil>
+
+
+<div style="text-align: center;">  <br><br><u style="font-size: 35px;"><b>خصائص المواد</b> </u><br><br><br>
+</div>
+
+
+
+
+
+<div style="background: #ECECEC; padding: 30px;">
+  <div style="text-align: center;">
+    <nz-input-group  nzAddOnAfter="بحث">
+
+    <input  nz-input placeholder="بحث"  [(ngModel)]="term">
+    </nz-input-group>
+</div>
+<br>
+  <nz-table #basicTable [nzData]="listOfData" style="max-width: 5000px;">
+    <thead>
+    <tr>
+      <th><b> حذف</b></th>
+      <th > <b> تعديل </b></th>
+      <th > <b> تفاصيل </b></th>
+
+      <th><b> الحد الادنى </b></th>
+      <th> <b>صنف فرعي</b></th>
+      <th> <b> الصنف </b></th>
+      <th> <b> الوحدة</b></th>
+      <th> <b> الاسم </b></th>
+      <th > <b>  الرمز المميز</b></th>
+     
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let data of basicTable.data | filter:term">
+      <td ><a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteFournisseur(data.id)">
+        <span style="color: red ;" class="material-icons" >
+restore_from_trash
+</span></a></td>
+<td >  <a  (click)="showModal11(data.id)"> <span style="color: red ;" class="material-icons" >
+  update
+  </span></a></td>
+  <td><nz-avatar nzIcon="up" style="background-color:#1a237e;" nz-popover [nzPopoverTitle]="titleTemplate" [nzPopoverContent]="contentTemplate"></nz-avatar>
+
+    <ng-template #titleTemplate>{{data.codeAbar}}</ng-template>
+    <ng-template  #contentTemplate>
+     <p style="direction: rtl;">  <b> الاسم :  </b>{{data.marque}} 
+      <br><b> الوحدة: </b> {{data.idUnite}} 
+      <br><b>  الصنف :</b> {{data.idCategorie}}
+      <br><b>  صنف فرعي	 :</b> {{data.idSousCategorie}}
+      <br><b> الحد الادنى :</b> {{data.minQuant}}
+    </p>
+    </ng-template>
+  
+  </td>
+        <td>{{ data.minQuant }}</td>
+        <td>{{ data.idSousCategorie  }}</td>
+        <td>{{ data.idCategorie }}</td>
+        <td>{{ data.idUnite }}</td>
+        <td>{{ data.marque}}</td>
+
+      <td>{{ data.codeAbar }}</td>
+
+
+
+
+      
+     
+        
+      
+      
+      
+      
+
+
+
+
+
+    </tr>
+    </tbody>
+  
+  </nz-table>
+
+    <button  (click)="showModal1()" >إضافة مادة</button>&nbsp;
+  
+
+</div>
+<!--add-->
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="titleTemplate1 " (nzOnCancel)="handleCancel1()" (nzOnOk)="handleOk1()" nzWidth="500">
+
+  <div nz-row>
+    <div nz-col nzSpan="11">
+
+  <div>
+    <nz-input-group nzAddOnAfter="الرمز المميز">
+      <input type="number" nz-input [(ngModel)]="codeP" placeholder="ex = 1 " />
+    </nz-input-group>
+  </div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="أنواع المواد">
+      <input type="text" nz-input [(ngModel)]="typeP"  />
+    </nz-input-group>
+  </div>
+
+      <br>
+
+  <div>
+    <nz-input-group nzAddOnAfter="اللون">
+      <input type="color" nz-input [(ngModel)]="couleur" />
+    </nz-input-group>
+  </div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="الحجم">
+      <input type="text" nz-input [(ngModel)]="taille" placeholder="طول * عرض * إرتفاع" />
+    </nz-input-group>
+  </div>
+      <br>
+
+
+      <div>
+        <nz-input-group nzAddOnAfter="الحالة ">
+          <select  PlaceHolder="قم بإختيار الحالة " id="etat" style="width: 100%; height: 30px;">
+            <option disabled selected >الحالة</option>
+    
+            <option value="faible" >حالة سيئة</option>
+            <option Value="normal" >حالة عادية</option>
+            <option Value="bonne" >حالة جيدة</option>
+            <option Value="trés bonne" >حالة جيدة جدا</option>
+    
+          </select>
+        </nz-input-group>
+
+      </div>
+      <br>
+  <div>
+  <nz-input-group nzAddOnAfter="الصنف">
+     
+  
+
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="صنف" [(ngModel)]="categorie" style="width: 100% ;"  (ngModelChange)="log1($event)" >
+      <nz-option  *ngFor="let user of listCategorie" nzLabel="{{user.designation}}" nzValue="{{user.designation}}"></nz-option>
+
+    </nz-select>
+
+  </nz-input-group>
+  <button nz-button nzType="default" >إضافة صنف</button>
+  </div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="صنف فرعي">
+      <!-- <input type="text" nz-input [(ngModel)]="sousCat"  placeholder="صنف  فرعي "/> -->
+
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="صنف  فرعي " [(ngModel)]="sousCat" style="width: 100% ;"  >
+        <nz-option  *ngFor="let user of ListSousCategorie" nzLabel="{{user.categorie}}" nzValue="{{user.categorie}}"></nz-option>
+  
+      </nz-select>
+    </nz-input-group>
+    <button nz-button nzType="default" > إضافة صنف فرعي</button>
+
+  </div>
+      <br>
+    </div>
+    <div nz-col nzSpan="2"></div>
+    <div nz-col nzSpan="11">
+      <div>
+
+
+        <nz-input-group nzAddOnAfter="الوحدة ">
+
+          <select style="width: 100%; height: 30px;" id="unite">
+            <option *ngFor="let structure of uniteList"  >
+              {{structure.nomUnite}}
+            </option>
+          </select>
+        </nz-input-group>
+    <button nz-button nzType="default" >إضافة وحدة</button>
+
+</div>
+      <br>
+  <div>
+
+    <nz-input-group nzAddOnAfter="المغازة ">
+
+      <select style="width: 100%; height: 30px;" id="magasin">
+        <option disabled selected >المغازة</option>
+        <option *ngFor="let structure of magasinList"  >
+          {{structure.designation}}
+        </option>
+  
+      </select>
+    </nz-input-group>
+  </div>
+      <br>
+  
+  
+  <div>
+    <nz-input-group nzAddOnAfter="الحد الأدنى">
+      <input type="number" nz-input [(ngModel)]="minQuantite"  placeholder="ex = 10"/>
+    </nz-input-group>
+  </div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="الكمية">
+      <input type="number" nz-input [(ngModel)]="Quantite" placeholder="ex=200" />
+    </nz-input-group>
+  </div>
+      <br>
+ 
+      <div>
+        <nz-input-group nzAddOnAfter="العلامة الصناعية">
+          <input type="text" nz-input [(ngModel)]="marque"  placeholder="ex=marque"/>
+        </nz-input-group>
+      </div>
+      
+    </div>
+  </div>
+
+</nz-modal>
+<ng-template #titleTemplate1>
+  <div style="text-align: center;">إضافة مادة</div>
+</ng-template>
+
+<!--update-->
+
+  <nz-modal [(nzVisible)]="isVisible1" [nzTitle]="titleTemplate2" (nzOnCancel)="handleCancel11()" (nzOnOk)="handleOk11()" nzWidth="500">
+
+  <div nz-row>
+    <div nz-col nzSpan="11">
+
+  <div>
+    <nz-input-group nzAddOnAfter="الرمز المميز">
+      <input type="number" nz-input [(ngModel)]="codeP" placeholder="ex = 1 " />
+    </nz-input-group>
+  </div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="أنواع المواد">
+      <input type="text" nz-input [(ngModel)]="typeP"  />
+    </nz-input-group>
+  </div>
+
+      <br>
+
+  <div>
+    <nz-input-group nzAddOnAfter="اللون">
+      <input type="color" nz-input [(ngModel)]="couleur" />
+    </nz-input-group>
+  </div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="الحجم">
+      <input type="text" nz-input [(ngModel)]="taille" placeholder="طول * عرض * إرتفاع" />
+    </nz-input-group>
+  </div>
+      <br>
+
+
+      <div>
+        <nz-input-group nzAddOnAfter="الحالة ">
+      <select  PlaceHolder="قم بإختيار الحالة " id="etat" style="width: 100%; height: 30px;">
+        <option disabled selected >الحالة</option>
+
+        <option value="faible" >حالة سيئة</option>
+        <option Value="normal" >حالة عادية</option>
+        <option Value="bonne" >حالة جيدة</option>
+        <option Value="trés bonne" >حالة جيدة جدا</option>
+
+      </select>
+    </nz-input-group>
+
+
+      </div>
+      <br>
+  <div>
+  <nz-input-group nzAddOnAfter="الصنف">
+     
+  
+
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="صنف" [(ngModel)]="categorie" style="width: 100% ;"  (ngModelChange)="log1($event)" >
+      <nz-option  *ngFor="let user of listCategorie" nzLabel="{{user.designation}}" nzValue="{{user.designation}}"></nz-option>
+
+    </nz-select>
+
+  </nz-input-group>
+  <button nz-button nzType="default" >إضافة صنف</button>
+  </div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="صنف فرعي">
+
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="صنف  فرعي " [(ngModel)]="sousCat" style="width: 100% ;"  >
+        <nz-option  *ngFor="let user of ListSousCategorie" nzLabel="{{user.categorie}}" nzValue="{{user.categorie}}"></nz-option>
+  
+      </nz-select>
+    </nz-input-group>
+    <button nz-button nzType="default" > إضافة صنف فرعي</button>
+
+  </div>
+      <br>
+    </div>
+    <div nz-col nzSpan="2"></div>
+    <div nz-col nzSpan="11">
+      <div>
+
+    <nz-input-group nzAddOnAfter="الوحدة ">
+
+    <select style="width: 100%; height: 30px;" id="unite">
+      <option *ngFor="let structure of uniteList"  >
+        {{structure.nomUnite}}
+      </option>
+    </select>
+  </nz-input-group>
+
+    <button nz-button nzType="default" >إضافة وحدة</button>
+
+</div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="المغازة ">
+
+    <select style="width: 100%; height: 30px;" id="magasin">
+      <option disabled selected >المغازة</option>
+      <option *ngFor="let structure of magasinList"  >
+        {{structure.designation}}
+      </option>
+
+    </select>
+  </nz-input-group>
+
+  </div>
+      <br>
+  
+  
+  <div>
+    <nz-input-group nzAddOnAfter="الحد الأدنى">
+      <input type="number" nz-input [(ngModel)]="minQuantite"  placeholder="ex = 10"/>
+    </nz-input-group>
+  </div>
+      <br>
+  <div>
+    <nz-input-group nzAddOnAfter="الكمية">
+      <input type="number" nz-input [(ngModel)]="Quantite" placeholder="ex=200" />
+    </nz-input-group>
+  </div>
+      <br>
+ 
+      <div>
+        <nz-input-group nzAddOnAfter="العلامة الصناعية">
+          <input type="text" nz-input [(ngModel)]="marque"  placeholder="ex=marque"/>
+        </nz-input-group>
+      </div>
+      
+    </div>
+  </div>
+
+</nz-modal>
+ <ng-template #titleTemplate2>
+    <div style="text-align: center;">تحيين مادة</div>
+  </ng-template>
+
+

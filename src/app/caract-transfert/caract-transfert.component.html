@@ -1,0 +1,197 @@
+<app-accueil></app-accueil>
+
+
+<div style="text-align: center;">  <br><br><u style="font-size: 35px;">خصائص التحويل</u><br><br><br>
+</div>
+<div style="background: #ECECEC; padding: 30px; ">
+  <nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="6">
+      <nz-card  (click)="showModal()">
+        <mat-icon  style="color:  #1A237E;"  >storage</mat-icon> &nbsp;<b  style="color:  #1A237E;">  أمر شراء   </b>
+      </nz-card>
+    </nz-col>
+
+    <nz-col [nzSpan]="6">
+      <nz-card (click)="showModal1()">
+        <mat-icon  style="color:  #1A237E;" >apartment</mat-icon>&nbsp;<b  style="color:  #1A237E;">حالة التحويل</b>
+      </nz-card>
+    </nz-col>
+
+  </nz-row>
+</div>
+
+
+
+
+
+
+<div style="background: #ECECEC; padding: 30px;">
+  <nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="12">
+      <nz-card  >
+        <mat-icon  style="color:  #1A237E;" >center_focus_weak</mat-icon>&nbsp;<b  style="color:  #1A237E;"> فواتير أوامر الشراء </b>
+        <br>
+        <input nz-input placeholder="متلقي"  style="width: 150px;" [(ngModel)]="DestSearch"  />
+        &nbsp;
+        <input nz-input type="date" placeholder="تاريخ" style="width: 150px;" [(ngModel)]="DateS" />
+        &nbsp;
+        <button nz-button nzType="primary" nzShape="circle" (click)="Reportsearch()"><i nz-icon nzType="search"></i></button>
+        &nbsp;
+        <button nz-button nzType="primary" nzShape="circle" (click)="all()"><i nz-icon [nzType]="'sync'" [nzSpin]="true"></i></button>
+        &nbsp;
+     <a  nz-button nzType="primary" [nzSize]="20" nzShape="round"  href="http://167.86.107.74:8081/farah/Rapport/pdf/{{DestSearch}}/{{DateS}}">
+          <i nz-icon nzType="download"></i>تحميل
+        </a>
+        <br>  <br>
+
+
+        <nz-table #basicTable2 [nzData]="BDCList">
+          <thead>
+            <tr>
+              <th><b> متلقي </b></th>
+              <th><b> متلق </b></th>
+              <th><b> تاريخ البرنامج </b></th>
+
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable2.data | filter :DestSearch">
+              <td>{{data.destinatair}}</td>
+              <td>{{data.destinateur}}</td>
+              <td>{{data.dateDemission}}</td>
+              <td><a href="http://167.86.107.74:8081/farah/Rapport/pdf/{{data.id}}"> <b> تحميل </b></a></td>
+              <td >            <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRapport(data.id)">
+                <span style="color: red ;" class="material-icons" >
+  restore_from_trash
+  </span></a></td>
+
+
+
+            </tr>
+          </tbody>
+        </nz-table>
+
+
+      </nz-card>
+    </nz-col>
+    <nz-col [nzSpan]="12">
+      <nz-card >
+        <mat-icon  style="color:  #1A237E;" >apartment</mat-icon>&nbsp;<b  style="color:  #1A237E;">حالة التحويل</b>
+        <br><br>
+        <input nz-input placeholder="بحث"  style="width: 100%;" [(ngModel)]="EtatSearch"  />
+        <br><br>
+        <nz-table #basicTable1 [nzData]="List">
+          <thead>
+            <tr>
+              <th><b> ولاية </b></th>
+              <th><b> حالة تسليم </b></th>
+              <th><b> نوع التحويل </b></th>
+              <th><b>توقيت </b></th>
+              <th><b> المزود </b></th>
+              <th><b> تدفق </b></th>
+              <th></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable1.data | filter:EtatSearch">
+              <td>{{data.lieu}}</td>
+              <td>{{data.etatLivraison}}</td>
+              <td>{{data.typeTransfert}}</td>
+              <td>{{data.date}}</td>
+              <td>{{data.fournisseur}}</td>
+              <td>{{data.flux}}</td>
+              <td >            <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="delete(data.id)">
+                <span style="color: red ;" class="material-icons" >
+  restore_from_trash
+  </span></a></td>
+            </tr>
+          </tbody>
+        </nz-table>      </nz-card>
+    </nz-col>
+
+
+  </nz-row>
+</div>
+
+
+
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="أمر شراء" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <label for="">مرسل : </label>
+  <input nz-input placeholder="متلق" [(ngModel)]="Destinateur"  />
+  <br />
+  <br />
+
+  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="متلقي" [(ngModel)]="Destinatair" style="width: 100% ;"  (ngModelChange)="log2($event)">
+    <nz-option  *ngFor="let user of Users" nzLabel="{{user.email}}" nzValue="{{user.email}}"></nz-option>
+
+  </nz-select>
+
+
+  <br />
+  <br />
+  <input nz-input placeholder="طراز" [(ngModel)]="type" />  <br />
+  <br />
+  <input nz-input  type="number" placeholder="السعر" [(ngModel)]="prix" />  <br />
+  <br />
+  <label for="">تاريخ البرنامج</label>
+  <input nz-input  type="date" placeholder="تاريخ البرنامج" [(ngModel)]="dateDemission" />  <br />
+  <br />
+  <input  nz-input type="number" placeholder="كمية" [(ngModel)]="quantite" />
+  <br />
+  <br />
+  <input nz-input placeholder="إمداد" [(ngModel)]="demandeFourniture" />
+
+</nz-modal>
+
+
+
+
+<nz-modal [(nzVisible)]="isVisible1" nzTitle="حالة التحويل" (nzOnCancel)="handleCancel1()" (nzOnOk)="handleOk1()">
+
+
+  <input nz-input placeholder="type" [(ngModel)]="typeTransfert" />
+  <br />
+  <br />
+  <select style="width: 100%; height: 30px;" id="fournisseur">
+    <option disabled selected >مزود</option>
+    <option *ngFor="let structure of FournisseurList"  >
+      {{structure.email}}
+    </option>
+
+  </select>
+  <br />
+  <br />
+  <input nz-input  type="date" placeholder="date" [(ngModel)]="date" />
+  <br />
+  <br />
+  <nz-select [(ngModel)]="etatLivraison" nzAllowClear nzPlaceHolder="Etat"  style="width: 100%; height: 30px;">
+    <nz-option nzValue="Externe" nzLabel="Externe"></nz-option>
+    <nz-option nzValue="Interne" nzLabel="Interne"></nz-option>
+  </nz-select>
+
+  <br />
+  <br />
+
+  <select name="select"  style="width: 100%; height: 30px;" id="localisation">
+    <option disabled selected >ولاية</option>
+    <option
+    *ngFor="let lieu of map"
+    value="{{lieu.lieu}}">{{lieu.mo3tamdeya}}</option>
+
+
+          </select>
+
+          <br />
+          <br />
+
+          <nz-select [(ngModel)]="flux" nzAllowClear nzPlaceHolder="flux"  style="width: 100%; height: 30px;">
+            <nz-option nzValue="Entrer" nzLabel="Entrer"></nz-option>
+            <nz-option nzValue="Sortie" nzLabel="Sortie"></nz-option>
+          </nz-select>
+
+</nz-modal>

@@ -1,0 +1,83 @@
+
+<mat-toolbar style="background-color: #335511;">
+
+
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button nz-button nz-popover nzType="primary" style="background-color: #335511;" [nzPopoverContent]="contentTemplate"> <mat-icon style="color: white ; ">account_circle</mat-icon></button>
+  </button>
+  <span class="example-spacer"></span>
+
+  <div style="text-align: center;"><span style="color: white ; font-family: bold ; "><b>التصرف في المخزون</b></span></div>
+
+
+  <span class="example-spacer"></span>
+
+
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="open()">
+
+    <mat-icon STYLE="color: white;" >menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right"  (nzOnClose)="close()">
+
+  <div style="text-align: center;"><h2 nzDanger ><u> <b>  التصرف في المخزون</b></u></h2></div>
+
+
+  <ul nz-list  nzSize="large">
+
+
+    <li nz-list-item  nzFlex>
+      <button nz-button nzType="text" nzDanger  routerLink=""> 	<mat-icon  style="color:  #335511;" >storage</mat-icon> &nbsp;<b  style="color:  #335511;">تسجيل وصل طلب داخلي </b></button>
+    </li>
+
+
+    <li nz-list-item  nzFlex>
+      <button nz-button nzType="text" nzDanger routerLink=""> 	<mat-icon  style="color:  #335511;" >storage</mat-icon> &nbsp;<b  style="color:  #335511;"> تسجيل التحويل</b></button>
+    </li>
+
+
+    <li nz-list-item  nzFlex>
+      <button nz-button nzType="text" nzDanger > 	<mat-icon  style="color:  #335511;" >storage</mat-icon> &nbsp;<b  style="color:  #335511;">تسجيل تسلم المواد</b></button>
+    </li>
+
+    <li nz-list-item  nzFlex>
+      <button nz-button nzType="text" nzDanger > 	<mat-icon  style="color:  #335511;" >storage</mat-icon> &nbsp;<b  style="color:  #335511;">خصائص المواد في المخزن</b></button>
+    </li>
+
+    <li nz-list-item  nzFlex>
+      <button nz-button nzType="text" nzDanger  routerLink=""> 	<mat-icon  style="color:  #335511;" >storage</mat-icon> &nbsp;<b  style="color:  #335511;"> تسجيل وصل</b></button>
+    </li>
+
+
+    <li nz-list-item  nzFlex>
+      <button nz-button nzType="text" nzDanger > 	<mat-icon  style="color:  #335511;" >storage</mat-icon> &nbsp;<b  style="color:  #335511;"> تسجيل محضر</b></button>
+    </li>
+
+  </ul>
+
+
+
+
+</nz-drawer>
+
+<ng-template #contentTemplate>
+  <div>
+    <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+      <nz-card-meta nzTitle="Farah Reggui" nzDescription="Ingénieure informatique" [nzAvatar]="avatarTemplate"></nz-card-meta>
+    </nz-card>
+    <ng-template #avatarTemplate>
+      <nz-avatar nzSrc="https://scontent-mrs2-1.xx.fbcdn.net/v/t1.0-9/47227147_2148785315448813_388039248537714688_o.jpg?_nc_cat=100&ccb=2&_nc_sid=09cbfe&_nc_ohc=xr3s_NVYCXkAX9pe8XG&_nc_ht=scontent-mrs2-1.xx&oh=476522ef02cb4abd920fcef0ec949bb5&oe=5FDABD8A"></nz-avatar>
+    </ng-template>
+
+    <ng-template #actionSetting>
+      <i nz-icon nzType="setting"></i>
+    </ng-template>
+
+    <ng-template #actionEllipsis>
+      <i nz-icon nzType="login" routerLink="../"> </i>
+    </ng-template>
+
+  </div>
+</ng-template>
+

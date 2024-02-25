@@ -1,0 +1,93 @@
+<app-client></app-client>
+
+
+
+<nz-layout>
+  <br><br>
+  <nz-content>
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>Client</nz-breadcrumb-item>
+      <nz-breadcrumb-item>Personalisation</nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <div class="inner-content">
+  
+
+      <div nz-row>
+        <div nz-col nzSpan="10">
+          <input nz-input placeholder="بحث"  [(ngModel)]="term" style="max-width:100% ;">
+          <br>
+          <br>
+          <mat-card>
+          <nz-table #basicTable [nzData]="dataSet| filter:term">
+            <thead>
+            <tr>
+              <th>الاسم</th>
+              <th>توقيت</th>
+              <th>structure</th>
+              <th>Gestion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td><b>{{data.nameFormulaire}}</b></td>
+              <td><b> {{data.dateTemps}} </b></td>
+              <td><b> {{data.structure}}</b></td>
+              <td>
+                <a (click)="showInputs(data.id)"> <i nz-icon nzType="plus-square" nzTheme="outline" style="font-size: 25px; color: red;"></i></a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="showModal(data.id)"> <i nz-icon nzType="profile" nzTheme="outline" style="font-size: 25px; color: red;"></i></a>
+           
+              </td>
+            </tr>
+            </tbody>
+          </nz-table>
+
+          </mat-card>
+        </div>
+        <div nz-col nzSpan="1"></div>
+        <div nz-col nzSpan="12">  <nz-table #basicTable2 [nzData]="inputs">
+
+          <tbody>
+          <tr *ngFor="let data of basicTable2.data">
+
+            <td> <input  nz-input id="{{ data.id}}" type ="{{ data.type }}" name="{{ data.name }}" placeholder="{{ data.name }}" required="{{ data.required }}"></td>
+            <br>
+          </tr>
+
+          </tbody>
+          <br>
+          <button  mat-raised-button style="display: {{display}} ; margin-left: 10px;"  (click)="ajout()" color="primary" >إضافة</button>
+          <br>
+        </nz-table>
+        </div>
+      </div>
+    </div>
+  </nz-content>
+</nz-layout>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Formulaire" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+
+  <mat-accordion  *ngFor="let book of Listheader">
+  
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false" (click)="viewData(book)" >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+        <b> {{book}} </b>
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <nz-list [nzDataSource]="data" nzBordered [nzRenderItem]="defaultItem">
+        <ng-template #defaultItem let-item>
+          <nz-list-item>
+        
+            {{ item.value }}
+          </nz-list-item>
+        </ng-template>
+      </nz-list>
+    </mat-expansion-panel>
+
+
+
+  </mat-accordion>
+</nz-modal>

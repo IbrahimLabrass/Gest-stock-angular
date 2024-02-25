@@ -1,0 +1,173 @@
+<app-client></app-client>
+
+
+<nz-tabset >
+  <nz-tab nzTitle="إضافة">
+    <div nz-row >
+      <div nz-col nzSpan="4"></div>
+
+      <div nz-col nzSpan="7">
+        <nz-card nzTitle="المخزن 1">
+
+        <div>
+          <nz-input-group  nzAddOnAfter="الولاية">
+            <input type="text" nz-input  />
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="رمز المخزن">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="العنوان">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="رقم الهاتف">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="رقم الفاكس">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+        <div>
+          <nz-input-group  nzAddOnAfter="code postal">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+        <button mat-flat-button color="warn" style="width: 400px;">إضافة</button>
+        </nz-card>
+      </div>
+
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="7">
+
+        <nz-card nzTitle="المخزن 2 ">
+
+
+          <div>
+            <nz-input-group  nzAddOnAfter="تعريف المخزن كامل">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+
+          <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="المعتمديّة">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+          <div>
+            <nz-input-group  nzAddOnAfter="المسؤول عن المخزن">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+          <div>
+            <nz-input-group  nzAddOnAfter="الإسم القصير">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="أمين المخزن">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="Désignation longue">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="Désignation courte">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+        <br>
+
+        </nz-card>
+
+      </div>
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="7">
+
+
+
+
+      </div>
+    </div>
+
+  </nz-tab>
+  <nz-tab nzTitle="البحث">
+    <nz-card nzTitle="تسجيل المخزن">
+
+      <div nz-col nzSpan="24">
+
+        <nz-input-group  nzAddOnAfter="بحث">
+
+          <input type="text" nz-input/>
+        </nz-input-group>
+        <br>
+        <br>
+        <nz-table #basicTable   >
+          <thead>
+          <tr>
+            <th>تعريف المخزن كامل</th>
+            <th>المعتمديّة </th>
+            <th>المسؤول عن المخزن</th>
+            <th>الإسم القصير</th>
+            <th>أمين المخزن</th>
+            <th>Dèsignation courte</th>
+            <th>Dèsignation longue</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>011</td>
+            <td>HR</td>
+            <td>QWERTY</td>
+            <td>azerty</td>
+            <td>QWERTY</td>
+            <td>azerty</td>
+            <td>azerty</td>
+            <td ><a><span class="material-icons" style="color: red ;">
+restore_from_trash
+</span></a></td>
+          </tr>
+
+          </tbody>
+        </nz-table>
+      </div>
+    </nz-card>
+  </nz-tab>
+</nz-tabset>

@@ -1,0 +1,135 @@
+<app-client></app-client>
+
+
+<nz-tabset >
+  <nz-tab nzTitle="إضافة">
+    <div nz-row >
+      <div nz-col nzSpan="7">
+
+      </div>
+
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="7">
+        <nz-card nzTitle="تسجيل الوحدة">
+        <div>
+          <nz-input-group  nzAddOnAfter="نوع الهيكل">
+            <input type="text" nz-input  />
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="رمز الهيكل">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="تعريف الهيكل القصير">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="الهاتف">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+
+        <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="الهيكل المشرف">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+          <div>
+          <nz-input-group  nzAddOnAfter="تعريف الهيكل كامل">
+            <input type="text" nz-input/>
+          </nz-input-group>
+        </div>
+          <br>
+          <div>
+            <nz-input-group  nzAddOnAfter="الفاكس">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="Dèsignation courte">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+          <div>
+            <nz-input-group  nzAddOnAfter="Dèsignation longue">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+
+        <br>
+        <button mat-raised-button color="danger">إضافة</button>
+        </nz-card>
+      </div>
+
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="7">
+
+
+
+
+      </div>
+    </div>
+
+  </nz-tab>
+  <nz-tab nzTitle="البحث">
+    <nz-card nzTitle="تسجيل الوحدة">
+
+    <div nz-col nzSpan="24">
+
+      <nz-input-group  nzAddOnAfter="بحث">
+
+        <input type="text" nz-input/>
+      </nz-input-group>
+      <br>
+      <br>
+      <nz-table #basicTable   >
+        <thead>
+        <tr>
+          <th>نوع الهيكل</th>
+          <th>رمز الهيكل </th>
+          <th>تعريف الهيكل القصير</th>
+          <th>الهاتف</th>
+          <th>الفاكس</th>
+          <th>Dèsignation courte</th>
+          <th>Dèsignation longue</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>011</td>
+          <td>HR</td>
+          <td>QWERTY</td>
+          <td>azerty</td>
+          <td>QWERTY</td>
+          <td>azerty</td>
+          <td>azerty</td>
+          <td ><a><span class="material-icons" style="color: red ;">
+restore_from_trash
+</span></a></td>
+        </tr>
+
+        </tbody>
+      </nz-table>
+    </div>
+    </nz-card>
+  </nz-tab>
+</nz-tabset>

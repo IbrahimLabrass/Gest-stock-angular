@@ -1,0 +1,158 @@
+<app-agent-stock></app-agent-stock>
+
+<nz-tabset >
+  <nz-tab nzTitle="إضافة">
+    <div nz-row >
+      <div nz-col nzSpan="4"></div>
+
+      <div nz-col nzSpan="7">
+        <nz-card nzTitle="">
+
+          <div>
+            <nz-input-group  nzAddOnAfter="رمز وصل طلب داخلي ">
+              <input type="text" nz-input  />
+            </nz-input-group>
+          </div>
+
+          <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="تاريخ الوصل">
+              <input type="date" nz-input/>
+            </nz-input-group>
+          </div>
+
+          <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="الهيكل">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+
+          <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="نوع الهيكل">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+
+          <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="المستفيد">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+
+          <br>
+          <div>
+            <nz-input-group  nzAddOnAfter="صفته">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+
+          <br>
+
+        </nz-card>
+      </div>
+
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="7">
+
+        <nz-card nzTitle="">
+
+
+          <div>
+            <nz-input-group  nzAddOnAfter="المخزن">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+
+          <br>
+
+          <div>
+            <nz-input-group  nzAddOnAfter="صفة وصل الطلب">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+          <div>
+            <nz-input-group  nzAddOnAfter="مرجع وصل الطلب">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+          <div>
+            <nz-input-group  nzAddOnAfter="الملاحظات">
+              <input type="text" nz-input/>
+            </nz-input-group>
+          </div>
+          <br>
+
+          <button mat-flat-button style="width: 400px; background-color: darkgreen;color: white;">إضافة</button>
+
+
+        </nz-card>
+
+      </div>
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="7">
+
+
+
+
+      </div>
+    </div>
+
+  </nz-tab>
+  <nz-tab nzTitle="البحث">
+    <nz-card nzTitle="تسجيل المخزن">
+
+      <div nz-col nzSpan="24">
+
+        <nz-input-group  nzAddOnAfter="بحث">
+
+          <input type="text" nz-input/>
+        </nz-input-group>
+        <br>
+        <br>
+        <nz-table #basicTable   >
+          <thead>
+          <tr>
+            <th>رمز وصل طلب داخلي </th>
+            <th>تاريخ الوصل</th>
+            <th>الهيكل</th>
+            <th>نوع الهيكل</th>
+            <th>المستفيد</th>
+            <th>صفته</th>
+            <th>صفة وصل الطلب</th>
+            <th>مرجع وصل الطلب</th>
+            <th>الملاحظات</th>
+            <th></th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>011</td>
+            <td>HR</td>
+            <td>QWERTY</td>
+            <td>azerty</td>
+            <td>QWERTY</td>
+            <td>azerty</td>
+            <td>azerty</td>
+            <td>azerty</td>
+            <td>azerty</td>
+            <td ><a><span class="material-icons" style="color: darkgreen ;">
+restore_from_trash
+</span></a></td>
+          </tr>
+
+          </tbody>
+        </nz-table>
+      </div>
+    </nz-card>
+  </nz-tab>
+</nz-tabset>

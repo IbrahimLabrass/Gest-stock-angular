@@ -1,0 +1,16 @@
+[nz-button] {
+  margin-left: 600px;
+  margin-bottom: 12px;
+  width: 150px;
+  background-color: #1a237e;
+  color: white;
+}
+
+nz-button-group [nz-button] {
+  margin-right: 0;
+}
+
+
+nz-select {
+  width: 100%;
+}

@@ -1,0 +1,225 @@
+
+<mat-toolbar style="background-color: #A60329;">
+
+
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button nz-button nz-popover nzType="primary" style="background-color: #A60329;" [nzPopoverContent]="contentTemplate"> <mat-icon style="color: white ; ">account_circle</mat-icon></button>
+  </button>
+  <span class="example-spacer"></span>
+
+  <div style="text-align: center;"><span style="color: white ; font-family: bold ; "><b>التصرف في المخزون</b></span></div>
+
+
+  <span class="example-spacer"></span>
+
+
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="open()">
+
+    <mat-icon STYLE="color: white;" >menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<ng-template #contentTemplate>
+  <div>
+    <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+      <nz-card-meta nzTitle="{{login}}" nzDescription="Ingénieure informatique" [nzAvatar]="avatarTemplate"></nz-card-meta>
+    </nz-card>
+    <ng-template #avatarTemplate>
+      <nz-avatar nzSrc="https://scontent-mrs2-1.xx.fbcdn.net/v/t1.0-9/47227147_2148785315448813_388039248537714688_o.jpg?_nc_cat=100&ccb=2&_nc_sid=09cbfe&_nc_ohc=xr3s_NVYCXkAX9pe8XG&_nc_ht=scontent-mrs2-1.xx&oh=476522ef02cb4abd920fcef0ec949bb5&oe=5FDABD8A"></nz-avatar>
+    </ng-template>
+
+    <ng-template #actionSetting>
+      <i nz-icon nzType="setting"></i>
+    </ng-template>
+
+    <ng-template #actionEllipsis>
+      <i nz-icon nzType="login" routerLink="../"> </i>
+    </ng-template>
+
+  </div>
+</ng-template>
+
+
+
+
+<nz-modal [(nzVisible)]="isVisible1" nzTitle="المستعملون" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="800px">
+
+  <div nz-row >
+    <div nz-col nzSpan="12">
+      <div>
+        <nz-input-group  nzAddOnAfter="مجال البحث">
+          <input type="text" nz-input  />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="رمز المستعمل">
+          <input type="text" nz-input/>
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="تعريف المستعمل">
+          <input type="text" nz-input/>
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="كلمة المرور">
+          <input type="text" nz-input/>
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="الهيكل">
+          <input type="text" nz-input/>
+        </nz-input-group>
+      </div>
+    </div>
+    <div nz-col nzSpan="1"></div>
+
+    <div nz-col nzSpan="11">
+
+      <nz-input-group  nzAddOnAfter="بحث">
+
+        <input type="text" nz-input/>
+      </nz-input-group>
+      <br>
+      <br>
+      <nz-table #basicTable   >
+        <thead>
+        <tr>
+          <th>رمز المستعمل</th>
+          <th>تعريف المستعمل </th>
+          <th>كلمة المرور</th>
+          <th>الهيكل</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>011</td>
+          <td>HR</td>
+          <td>QWERTY</td>
+          <td>azerty</td>
+          <td style="color: red ;"><a><span class="material-icons">
+restore_from_trash
+</span></a></td>
+        </tr>
+
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</nz-modal>
+
+
+
+
+
+
+<nz-modal [(nzVisible)]="isVisible2" nzTitle="المستعملون" (nzOnCancel)="handleCancel1()" (nzOnOk)="handleOk1()" nzWidth="800px">
+
+  <div nz-row >
+    <div nz-col nzSpan="12">
+      <div>
+        <nz-input-group  nzAddOnAfter="المخزن">
+          <input type="text" nz-input  />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="رمز اللجنة">
+          <input type="text" nz-input/>
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="المستعمل">
+          <input type="text" nz-input/>
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="صفته">
+          <input type="text" nz-input/>
+        </nz-input-group>
+      </div>
+
+      <br>
+
+    </div>
+    <div nz-col nzSpan="1"></div>
+
+    <div nz-col nzSpan="11">
+
+      <nz-input-group  nzAddOnAfter="بحث">
+
+        <input type="text" nz-input/>
+      </nz-input-group>
+      <br>
+      <br>
+      <nz-table #basicTable   >
+        <thead>
+        <tr>
+          <th>المخزن</th>
+          <th>رمز اللجنة</th>
+          <th>المستعمل</th>
+          <th>الهيكل</th>
+          <th>صفته</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>011</td>
+          <td>HR</td>
+          <td>QWERTY</td>
+          <td>azerty</td>
+          <td style="color: red ;"><a><span class="material-icons">
+restore_from_trash
+</span></a></td>
+        </tr>
+
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</nz-modal>
+<br>
+
+
+<br>
+<br>
+
+  <div class="gutter-example" style="padding-left: 30px;">
+  <div nz-row nzGutter="16">
+    <div nz-col class="gutter-row" nzSpan="6"  *ngFor="let book of dataSet ">
+      <div class="gutter-box" ><mat-card routerLink="../clientPerso">
+
+        <h1 style="color: #A60329;"> {{book.nameFormulaire}} </h1>
+       
+        <p>Date :{{book.dateTemps}} </p>
+        <p>Sujet : {{book.sujetFormulaire}} </p>
+        <p>Description : {{book.descFormulaire}} </p>
+
+
+      </mat-card></div>
+    </div>
+  
+  </div>
+</div>

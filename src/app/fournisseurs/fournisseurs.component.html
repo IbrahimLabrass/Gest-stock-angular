@@ -1,0 +1,225 @@
+<app-accueil></app-accueil>
+
+
+<div style="text-align: center;">  <br><br><u style="font-size: 35px;"><b>قائمة المزودون</b> </u><br><br><br>
+</div>
+<div style="background: #ECECEC; padding: 30px;">
+    <div style="text-align: center;">
+    <div nz-col nzSpan="24">
+
+      <nz-input-group  nzAddOnAfter="بحث">
+
+        <input type="text"   [(ngModel)]="SearchF" nz-input/>
+      </nz-input-group>
+      <br>
+      <br>
+      <nz-table #basicTable1 [nzData]="Fournisseur"   >
+        <thead>
+        <tr >
+
+          <th>حذف</th>
+          <th>تعديل</th>
+
+          <th>استعراض</th>
+          <th>رقم الفاكس</th>
+
+          <th>رقم الهاتف</th>
+
+          <th>البريد</th>
+
+          <th>نوع المزود</th>
+          <th>اسم المزود</th>
+          <th>المعرف الجبائي</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of basicTable1.data | filter : SearchF">
+          
+          <td ><a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteFournisseur(data.id)">
+            <span style="color: red ;" class="material-icons" >
+restore_from_trash
+</span></a></td>
+<td >  <a  (click)="showModal11(data)" > <span style="color: red ;" class="material-icons" >
+  update
+  </span></a></td>
+<td><nz-avatar nzIcon="up" style="background-color:#1a237e;" nz-popover [nzPopoverTitle]="titleTemplate" [nzPopoverContent]="contentTemplate"></nz-avatar>
+
+  <ng-template #titleTemplate>{{data.email}}</ng-template>
+  <ng-template  #contentTemplate>
+   <p style="direction: rtl;">  <b> المعرف الجبائي:  </b>{{data.mou3aref}} 
+    <br><b> البلد: </b> {{data.pays}} 
+    <br><b>  فاكس :</b> {{data.fax}}
+    <br><b>  العنوان :</b> {{data.adresse}}
+    <br><b> رقم الهاتف :</b> {{data.numTel}}
+  </p>
+  </ng-template>
+
+</td>
+          <td>{{data.fax}}</td>
+       
+          <td>{{data.numTel}}</td>
+   
+   
+          <td>{{data.email}}</td>
+          <td>{{data.typeF}}</td>
+          <td>{{data.Fournisseur}}</td>
+          <td>{{data.mou3aref}}</td>
+
+
+        </tr>
+
+        </tbody>
+      </nz-table>
+
+    </div>
+    </div>
+    <button  (click)="showModal1()" >إضافة </button>&nbsp;
+
+</div>
+<div>
+    
+  <nz-modal [(nzVisible)]="isVisible1" [nzTitle]="titleTemplate" (nzOnCancel)="handleCancel1()" (nzOnOk)="handleOk1()" nzWidth="800px">
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <div>
+          <nz-input-group nzAddOnAfter="البريد">
+            <input type="text" nz-input [(ngModel)]="emailF" name="emailF" required #emailField1="ngModel" />
+            <span class="error-message" *ngIf="emailField1.invalid && emailField1.touched">*</span>
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+        <div>
+          <nz-input-group nzAddOnAfter="المعرف الجبائي">
+            <input type="text" [(ngModel)]="mou3arefjiba2iF" nz-input name="mou3arefjiba2iF" required #mou3arefjiba2iField1="ngModel" />
+            <span class="error-message" *ngIf="mou3arefjiba2iField1.invalid && mou3arefjiba2iField1.touched">*</span>
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+  
+        <div>
+          <nz-input-group nzAddOnAfter="نوع المزود">
+            <select name="typeFO" id="typeFO" style="width: 100%;" [(ngModel)]="typeFO" required #typeFOField1="ngModel">
+              <option value="Grossiste">Grossiste</option>
+              <option value="Détaillant">Détaillant</option>
+              <option value="Prestataire">Prestataire</option>
+              <option value="Sous-traitant">Sous-traitant</option>
+              <option value="Centrale d'achat">Centrale d'achat</option>
+            </select>
+            <span class="error-message" *ngIf="typeFOField1.invalid && typeFOField1.touched">*</span>
+          </nz-input-group>
+        </div>
+      </div>
+  
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="11">
+        <div>
+          <nz-input-group nzAddOnAfter="الاسم المزود">
+            <input type="text" [(ngModel)]="codeFO" nz-input name="codeFO" required #codeFOField1="ngModel" />
+            <span class="error-message" *ngIf="codeFOField1.invalid && codeFOField1.touched">*</span>
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+        <div>
+          <nz-input-group nzAddOnAfter="رقم الهاتف">
+            <input type="text" [(ngModel)]="telFO" nz-input name="telFO" required #telFOField1="ngModel" />
+            <span class="error-message" *ngIf="telFOField1.invalid && telFOField1.touched">*</span>
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+        <div>
+          <nz-input-group nzAddOnAfter="رقم الفاكس">
+            <input type="text" [(ngModel)]="FaxFO" nz-input name="FaxFO" required #FaxFOField1="ngModel" />
+            <span class="error-message" *ngIf="FaxFOField1.invalid && FaxFOField1.touched">*</span>
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+       
+      </div>
+    </div>
+    <br>
+    <button mat-raised-button color="primary" (click)="creerFournisseur()" [disabled]="!isFormValid()">إضافة</button>
+  </nz-modal>
+  <ng-template #titleTemplate>
+    <div style="text-align: center;">إضافة مزود</div>
+  </ng-template>
+
+
+  <!--update-->
+     <nz-modal [(nzVisible)]="isVisible11" [nzTitle]="titleTemplate1" (nzOnCancel)="handleCancel11()" (nzOnOk)="handleOk11()" nzWidth="800px">
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <div>
+          <nz-input-group nzAddOnAfter="البريد">
+            <input type="text" nz-input [(ngModel)]="emailF" />
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+        <div>
+          <nz-input-group nzAddOnAfter="المعرف الجبائي">
+            <input type="text" [(ngModel)]="mou3arefjiba2iF" nz-input  />
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+        <div>
+          <nz-input-group nzAddOnAfter="نوع المزود" >
+            <select name="" id="typeFO" style="width: 100%;">
+              <option value="Grossiste">Grossiste</option>
+              <option value="Détaillant">Détaillant</option>
+              <option value="Prestataire">Prestataire</option>
+              <option value="Sous-traitant">Sous-traitant</option>
+              <option value="Centrale d'achat">Centrale d'achat</option>
+            </select>
+          </nz-input-group>
+        </div>
+      </div>
+  
+      <div nz-col nzSpan="1"></div>
+      <div nz-col nzSpan="11">
+        <div>
+          <nz-input-group nzAddOnAfter="الرمز">
+            <input type="text" [(ngModel)]="codeFO" nz-input />
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+        <div>
+          <nz-input-group nzAddOnAfter="رقم الهاتف">
+            <input type="text" [(ngModel)]="telFO" nz-input  />
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+        <div>
+          <nz-input-group nzAddOnAfter="رقم الفاكس">
+            <input type="text" [(ngModel)]="FaxFO" nz-input  />
+          </nz-input-group>
+        </div>
+  
+        <br>
+  
+       
+      </div>
+    </div>
+    <br>
+    <button mat-raised-button color="primary" (click)="updateFournisseur()">تحيين</button>
+  </nz-modal>
+  <ng-template #titleTemplate1>
+    <div style="text-align: center;">تحيين مزود</div>
+  </ng-template>
+  

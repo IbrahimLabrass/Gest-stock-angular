@@ -1,0 +1,226 @@
+<app-accueil></app-accueil>
+
+
+<div style="text-align: center;">  <br><br><u style="font-size: 35px;"><b>قائمة الهياكل</b> </u><br><br><br>
+</div>
+<div style="background: #ECECEC; padding: 30px;">
+    <div style="text-align: center;">
+            <div nz-col nzSpan="24">
+      
+                <nz-input-group  nzAddOnAfter="بحث">
+
+                    <input type="text"   [(ngModel)]="SearchF" nz-input/>
+                  </nz-input-group>
+                  <br>
+                  <br>
+              <nz-table #basicTable2 [nzData]="structure" [nzPageSize]="4" >
+                <thead>
+                <tr>
+                  <th>حذف</th>
+                  <th>تعديل</th>
+                  <th>معاينة</th>
+                  <th>الفاكس</th>
+                  <th>الهاتف</th>
+                  <th>صنف</th>
+                  <th>البريد</th>
+                  <th>الهيكل</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let data of basicTable2.data | filter:SearchF">
+                      <td ><a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteStructure(data.id)">
+                      <span style="color: red ;" class="material-icons" >
+                       restore_from_trash
+                      </span></a></td>
+                      <td >  <a  (click)="showModal22(data)"> <span style="color: red ;" class="material-icons" >
+                      update
+                     </span></a></td>
+                     <td><nz-avatar nzIcon="up" style="background-color:#1a237e;" nz-popover [nzPopoverTitle]="titleTemplate" [nzPopoverContent]="contentTemplate"></nz-avatar>
+
+                      <ng-template #titleTemplate>{{data.email}}</ng-template>
+                      <ng-template  #contentTemplate>
+                       <p style="direction: rtl;">  <b>  الهيكل:  </b>{{data.desingation}} 
+                        <br><b> البريد: </b> {{data.emailF}} 
+                        <br><b>  صنف :</b> {{data.type}}
+                        <br><b>  الهاتف :</b> {{data.numTel}}
+                        <br><b>  الفاكس :</b> {{data.fax}}
+                      </p>
+                      </ng-template>
+                    
+                    </td>
+                      <td>{{data.fax}}</td>
+                      <td>{{data.numTel}}</td>
+                      <td>{{data.type	}}</td>
+                      <td>{{data.emailF	}}</td>
+                      <td>{{data.desingation}}</td>
+                
+                </tr>
+                </tbody>
+              </nz-table>
+            </div>
+    </div>
+    <button  (click)="showModal2()" >إضافة </button>&nbsp;
+
+</div>
+<!--add-->
+<nz-modal [(nzVisible)]="isVisible2" [nzTitle]="titleTemplate" (nzOnCancel)="handleCancel2()" (nzOnOk)="handleOk2()" nzWidth="800px">
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <div>
+        <nz-input-group nzAddOnAfter="الاسم">
+          <input type="text" nz-input [(ngModel)]="DesigationS" name="DesigationS" required />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group nzAddOnAfter="البريد">
+          <input type="email" [(ngModel)]="emailF" nz-input name="emailF" required />
+        </nz-input-group>
+      </div>
+      
+      <br>
+      
+      <div>
+        <nz-input-group nzAddOnAfter="النوع">
+          <input type="text" [(ngModel)]="typeS" nz-input name="typeS" required />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group nzAddOnAfter="الهاتف">
+          <input type="text" [(ngModel)]="TelephoneS" nz-input name="TelephoneS" required />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group nzAddOnAfter="الفاكس">
+          <input type="text" [(ngModel)]="FaxS" nz-input name="FaxS" required />
+        </nz-input-group>
+      </div>
+      <br>
+
+      <div>
+       
+        <nz-input-group nzAddOnAfter=" مدير الهيكل" style="flex: 1;">
+          <input type="text"   [(ngModel)]="SearchF" nz-input/>
+      
+          <select style="width: 100%; height: 30px;" id="fournisseur">
+            <option *ngFor="let structure of FournisseurList">{{structure.email}}</option>
+          </select>
+        </nz-input-group>
+      
+            </div>
+      
+            <br>
+            <div>
+      <nz-input-group nzAddOnAfter="مسؤول التزويد" style="flex: 1;">
+          <input type="text"   [(ngModel)]="SearchF" nz-input/>
+      
+          <select style="width: 100%; height: 30px;" id="user">
+      
+            <option *ngFor="let user of users ">{{user.PrenomU}}</option>
+          </select>
+        </nz-input-group>
+      </div>
+      <br>
+      <div>
+<nz-input-group nzAddOnAfter="عون التزويد" style="flex: 1;">
+    <input type="text"   [(ngModel)]="SearchF" nz-input/>
+
+    <select style="width: 100%; height: 30px;" id="magasin">
+
+      <option *ngFor="let user of userList ">{{user.NomU}}</option>
+    </select>
+  </nz-input-group>
+</div>
+    </div>
+  </div>
+  <br>
+  <button mat-raised-button color="primary" (click)="ajoutStructure()" [disabled]="!isFormValid()">إضافة</button>
+</nz-modal>
+<ng-template #titleTemplate>
+  <div style="text-align: center;">إضافة هيكل</div>
+</ng-template>
+<!--update-->
+  <nz-modal [(nzVisible)]="isVisible22" [nzTitle]="titleTemplate1" (nzOnCancel)="handleCancel22()" (nzOnOk)="handleOk22()" nzWidth="800px">
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <div>
+        <nz-input-group nzAddOnAfter="الاسم">
+          <input type="text" nz-input [(ngModel)]="DesigationS"  />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group nzAddOnAfter="البريد">
+          <input type="email" [(ngModel)]="emailF" nz-input  />
+        </nz-input-group>
+      </div>
+      
+      <br>
+      
+      <div>
+        <nz-input-group nzAddOnAfter="النوع">
+          <input type="text" [(ngModel)]="typeS" nz-input  />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group nzAddOnAfter="الهاتف">
+          <input type="text" [(ngModel)]="TelephoneS" nz-input  />
+        </nz-input-group>
+      </div>
+      <br>
+
+
+      <div>
+        <nz-input-group nzAddOnAfter="الفاكس">
+          <input type="text" [(ngModel)]="FaxS" nz-input  />
+        </nz-input-group>
+      </div>
+
+
+      <div>
+       
+  <nz-input-group nzAddOnAfter=" مدير الهيكل" style="flex: 1;">
+    <input type="text"   [(ngModel)]="SearchF" nz-input/>
+
+    <select style="width: 100%; height: 30px;" id="fournisseur">
+      <option *ngFor="let structure of FournisseurList| filter:SearchF">{{structure.email}}</option>
+    </select>
+  </nz-input-group>
+
+      </div>
+
+      <br>
+      <div>
+<nz-input-group nzAddOnAfter="مسؤول التزويد" style="flex: 1;">
+    <input type="text"   [(ngModel)]="SearchF" nz-input/>
+
+    <select style="width: 100%; height: 30px;" id="magasin">
+
+      <option *ngFor="let structure of magasinList | filter:SearchF">{{structure.designation}}</option>
+    </select>
+  </nz-input-group>
+</div>
+      
+    </div>
+  </div>
+  <br>
+  <button mat-raised-button color="primary" (click)="updateStructure()" >تحيين</button>
+</nz-modal>
+<ng-template #titleTemplate1>
+  <div style="text-align: center;">تحيين هيكل</div>
+</ng-template>
+
+

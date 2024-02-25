@@ -1,0 +1,259 @@
+<app-accueil></app-accueil>
+
+
+<div style="text-align: center;">  <br><br><u style="font-size: 35px;">مستعملو المنظومة</u><br><br><br></div>
+<div style="background: #ECECEC; padding: 30px;">
+  <nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="24" >
+      <nz-input-group nzAddOnAfter="البحث">
+        <input nz-input placeholder="بحث"  style="width: 100%;" [(ngModel)]="EtatSearch"  />
+      </nz-input-group>
+    </nz-col>
+    
+    
+
+    
+  </nz-row>
+  <br>
+  <div nz-col nzSpan="24">
+
+
+    <nz-table #basicTable  [nzData]="Users" >
+      <thead>
+      <tr>
+        <th>حذف</th>
+        <th>تعديل</th>
+        <th>تعريف المستعمل </th>
+
+        <th> الهاتف</th>
+        <th> البريد</th>
+        <th>اللقب</th>
+        <th>الاسم<th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data | filter:EtatSearch">
+        <td >            <a nz-popconfirm nzPopconfirmTitle="Supprimer ?" (nzOnConfirm)="deleteUser(data.id)">
+          <span style="color: red ;" class="material-icons" >
+restore_from_trash
+</span></a></td>
+        <td >            <a (click)="showModal1()" >
+          <span style="color: red ;" class="material-icons" >
+          update
+          </span></a></td>
+          <td><nz-avatar nzIcon="user" style="background-color:#1a237e;" nz-popover [nzPopoverTitle]="titleTemplate" [nzPopoverContent]="contentTemplate"></nz-avatar>
+
+            <ng-template #titleTemplate>
+              <br><b> الأسم:</b> {{data.nom}} 
+              <br><b> اللقب:</b> 
+              {{data.prenom}}</ng-template>
+            <ng-template  #contentTemplate> <b>البريد :</b>  {{data.email}}
+              <br><b> الهاتف :</b> {{data.numTel}}
+            </ng-template>
+  
+          </td>
+        <td>{{data.numTel}}</td>
+        <td>{{data.EmailU}}</td>
+        <td>{{data.prenom}}</td>
+        <td>{{data.nom}}</td>
+
+       
+
+
+       
+
+
+      </tr>
+
+      </tbody>
+    </nz-table>
+  </div>
+  <button (click)="showModal()">اضافة مستعمل</button>
+
+</div>
+
+<!--add-->
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="titleTemplate "  (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="900px">
+
+  <div nz-row >
+ 
+
+    <div nz-col nzSpan="24">
+     
+  <br>
+
+  <div>
+    <nz-input-group  nzAddOnAfter="الأسم">
+      <input type="text" [(ngModel)]="PrenomU"  nz-input required class="required-field"/>
+    </nz-input-group>
+  </div>
+
+  <br>
+
+  <div>
+    <nz-input-group  nzAddOnAfter="اللّقب">
+      <input type="text" [(ngModel)]="NomU" nz-input required />
+    </nz-input-group>
+  </div>
+
+  <br>
+
+  <div>
+    <nz-input-group  nzAddOnAfter="رقم بطاقة التعريف">
+      <input type="text" [(ngModel)]="CinU" nz-input required />
+    </nz-input-group>
+  </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="البريد">
+          <input type="text" [(ngModel)]="EmailU" nz-input required />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="الهاتف">
+          <input type="text" [(ngModel)]="TelU" nz-input required />
+        </nz-input-group>
+      </div>
+
+      <br>
+  
+      <div>
+        <nz-input-group  nzAddOnAfter="كلمة المرور">
+          <input type="password" [(ngModel)]="PasswordU" nz-input required />
+        </nz-input-group>
+      </div>
+      <br>
+      <div>
+        <nz-input-group  nzAddOnAfter="تاكيد كلمة المرور" [ngClass]="{'match': PasswordU === PasswordConfirmU, 'mismatch': PasswordU !== PasswordConfirmU}">
+          <input type="password" [(ngModel)]="PasswordConfirmU" nz-input required />
+        </nz-input-group>
+        <div class="message" *ngIf="PasswordU !== PasswordConfirmU">
+          تاكد من كلمة المرور
+        </div>
+      </div>
+      <br>
+      <div>
+        <button nz-button nzType="default" (click)="AjoutUser()" > إضافة</button>
+      </div>
+
+
+
+    </div>
+    <div nz-col nzSpan="1"></div>
+
+  
+  </div>
+</nz-modal>
+<ng-template #titleTemplate>
+  <div style="text-align: center;">إضافة مستعمل</div>
+</ng-template>
+
+<!--update-->
+  <nz-modal [(nzVisible)]="isVisible1" [nzTitle]="titleTemplate1 "  (nzOnCancel)="handleCancel1()" (nzOnOk)="handleOk1()" nzWidth="900px">
+
+  <div nz-row >
+
+    <div nz-col nzSpan="24">
+     
+  <br>
+
+  <div>
+    <nz-input-group  nzAddOnAfter="الأسم">
+      <input type="text" [(ngModel)]="PrenomU"  nz-input  class="required-field"/>
+    </nz-input-group>
+  </div>
+
+  <br>
+
+  <div>
+    <nz-input-group  nzAddOnAfter="اللّقب">
+      <input type="text" [(ngModel)]="NomU" nz-input  />
+    </nz-input-group>
+  </div>
+
+  <br>
+
+  <div>
+    <nz-input-group  nzAddOnAfter="رقم بطاقة التعريف">
+      <input type="text" [(ngModel)]="CinU" nz-input  />
+    </nz-input-group>
+  </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="البريد">
+          <input type="text" [(ngModel)]="EmailU" nz-input  />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="الهاتف">
+          <input type="text" [(ngModel)]="TelU" nz-input  />
+        </nz-input-group>
+      </div>
+
+      <br>
+  
+      <div>
+        <nz-input-group  nzAddOnAfter="كلمة المرور">
+          <input type="password" [(ngModel)]="PasswordU" nz-input  />
+        </nz-input-group>
+      </div>
+      <br>
+      <div>
+        <nz-input-group  nzAddOnAfter="تاكيد كلمة المرور" [ngClass]="{'match': PasswordU === PasswordConfirmU, 'mismatch': PasswordU !== PasswordConfirmU}">
+          <input type="password" [(ngModel)]="PasswordConfirmU" nz-input required />
+        </nz-input-group>
+        <div class="message" *ngIf="PasswordU !== PasswordConfirmU">
+          تاكد من كلمة المرور
+        </div>
+      </div>
+      <br>
+      <div>
+        <button nz-button nzType="default" (click)="updateUser()" > تحيين</button>
+      </div>
+
+
+
+    </div>
+    <div nz-col nzSpan="1"></div>
+
+  
+  </div>
+</nz-modal>
+<ng-template #titleTemplate1>
+  <div style="text-align: center;">تحيين مستعمل</div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,290 @@
+<app-accueil></app-accueil>
+
+
+
+
+<div style="text-align: center;">  <br><br><u style="font-size: 35px;"><b>قائمة المغازات</b> </u><br><br><br>
+</div>
+<div style="background: #ECECEC; padding: 30px;">
+    <div style="text-align: center;">
+<div nz-col nzSpan="24">
+  
+    <nz-input-group  nzAddOnAfter="بحث"  >
+
+      <input type="text" [(ngModel)]="mg" nz-input/>
+    </nz-input-group>
+    <br>
+    <br>
+    <nz-table #basicTable [nzData]="Magasin" [nzPageSize]="4" >
+      <thead>
+      <tr>
+        <th>اعادة تفعيل</th>
+        <th>حذف</th>
+        <th>تعديل</th>
+        <th>معاينة</th>
+        <th>الامين </th>
+        <th>المسؤول </th>
+
+        <th>الفاكس </th>
+        <th>الهاتف </th>
+
+        <th>الولاية</th>
+
+        <th>المغازة</th>
+
+      
+        
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data | filter:mg">
+        <td >  <a  > <span style="color: red ;" class="material-icons" >
+          update
+          </span></a></td>
+        <td ><a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="delete(data.id)">
+          <span style="color: red ;" class="material-icons" >
+restore_from_trash
+</span></a></td>
+<td >  <a (click)="showModal2(magasin)" > <span style="color: red ;" class="material-icons" >
+  update
+  </span></a></td>
+<td><nz-avatar nzIcon="up" style="background-color:#1a237e;" nz-popover [nzPopoverTitle]="titleTemplate" [nzPopoverContent]="contentTemplate"></nz-avatar>
+
+  <ng-template #titleTemplate>{{data.designation}}</ng-template>
+  <ng-template  #contentTemplate>
+    <br><b> الولاية: </b> {{data.wilaya}} 
+
+   <p style="direction: rtl;">  <b> المسؤول:  </b>{{data.mass2oul}} 
+    <br><b> الأمين: </b> {{data.amin}} 
+    <br><b>  فاكس :</b> {{data.fax}}
+        
+    <br><b> الهاتف </b> {{data.numTel}}
+  </p>
+  </ng-template>
+
+</td>
+       <td>{{data.amin}}</td>
+
+      <td>{{data.mass2oul}}</td>
+
+       <td>{{data.fax}}</td>
+
+       <td>{{data.numTel}}</td>
+       <td>{{data.wilaya}}</td>
+
+        <td>{{data.designation}}</td>
+        
+      
+    
+      
+       
+
+       
+      </tr>
+
+      </tbody>
+    </nz-table>
+  </div>
+    </div>
+    <button  (click)="showModal()" >إضافة </button>&nbsp;
+
+</div>
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="titleTemplate" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="800px">
+        <div nz-row >
+        <div nz-col nzSpan="24">
+          <div>
+            <nz-input-group  nzAddOnAfter="الاسم ">
+              <input type="text" nz-input [(ngModel)]="designationF" />
+            </nz-input-group>
+          </div>
+          <br>
+  
+          <div>
+            <nz-input-group  nzAddOnAfter="الولاية">
+        
+
+              <nz-select nzShowSearch nzAllowClear nzPlaceHolder="الولاية" [(ngModel)]="wilayaF" style="width: 100% ;"   (ngModelChange)="log1($event)">
+                <nz-option  *ngFor="let user of wilaya" nzLabel="{{user.lieu}}" nzValue="{{user.lieu}}"></nz-option>
+          
+              </nz-select>
+            </nz-input-group>
+          </div>
+  
+          <br>
+  
+          <div>
+            <nz-input-group  nzAddOnAfter="المعتمدية">
+        
+
+              <nz-select nzShowSearch nzAllowClear nzPlaceHolder="المعتمدية" [(ngModel)]="wilayaF" style="width: 100% ;"   (ngModelChange)="log1($event)">
+                <nz-option  *ngFor="let user of wilaya" nzLabel="{{user.mo3tamdeya}}" nzValue="{{user.mo3tamdeya}}"></nz-option>
+          
+              </nz-select>
+            </nz-input-group>
+          </div>
+
+          <br>
+  
+          <div>
+            <nz-input-group  nzAddOnAfter="العنوان">
+              <input type="text" nz-input  [(ngModel)]="adresseF" />
+            </nz-input-group>
+          </div>
+  
+          <br>
+  
+          <div>
+            <nz-input-group  nzAddOnAfter="الترقيم البريدي ">
+              <input type="text" nz-input  [(ngModel)]="CodePostal" />
+            </nz-input-group>
+          </div>
+  
+          <br>
+
+    
+          <!--<div>
+           
+            
+            <nz-input-group  nzAddOnAfter="المسؤول">
+              <nz-select nzShowSearch nzAllowClear nzPlaceHolder="المسؤول" [(ngModel)]="responsableF" style="width: 100% ;"   (ngModelChange)="log1($event)">
+                <nz-option  *ngFor="let user of Users" nzLabel="{{user.email}}" nzValue="{{user.email}}"></nz-option>
+          
+              </nz-select>
+            </nz-input-group>
+          </div>-->
+  
+            <div>
+              <nz-input-group  nzAddOnAfter="الهاتف">
+                <input type="text" nz-input   [(ngModel)]="telephoneF" />
+              </nz-input-group>
+            </div>
+  
+            <br>
+  
+            <div>
+              <nz-input-group  nzAddOnAfter="الفاكس">
+                <input type="text" nz-input  [(ngModel)]="faxF"/>
+              </nz-input-group>
+            </div>
+  
+            <br>
+  
+        
+
+<!-- <nz-input-group  nzAddOnAfter="الأمين">
+              <nz-select nzShowSearch nzAllowClear nzPlaceHolder="الأمين" [(ngModel)]="aminF" style="width: 100% ;"  (ngModelChange)="log2($event)">
+                <nz-option  *ngFor="let user of Users" nzLabel="{{user.email}}" nzValue="{{user.email}}"></nz-option>
+          
+              </nz-select>
+            </nz-input-group>
+  
+            <br>-->
+           
+          </div>
+        <br>
+      </div>
+
+        <button mat-raised-button color="primary" (click)="creerMg()">إضافة</button>
+      
+  </nz-modal>
+  <ng-template #titleTemplate>
+    <div style="text-align: center;">إضافة مغازة</div>
+  </ng-template>
+  <nz-modal [(nzVisible)]="isVisible2" [nzTitle]="titleTemplate1" (nzOnCancel)="handleCancel2()" (nzOnOk)="handleOk2()" nzWidth="800px">
+    <div nz-row >
+    <div nz-col nzSpan="24">
+      <div>
+        <nz-input-group  nzAddOnAfter="الاسم ">
+          <input type="text" nz-input [(ngModel)]="designationF" />
+        </nz-input-group>
+      </div>
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="الولاية">
+    
+
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="الولاية" [(ngModel)]="wilayaF" style="width: 100% ;"   (ngModelChange)="log1($event)">
+            <nz-option  *ngFor="let user of wilaya" nzLabel="{{user.lieu}}" nzValue="{{user.lieu}}"></nz-option>
+      
+          </nz-select>
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="المعتمدية">
+    
+
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="المعتمدية" [(ngModel)]="wilayaF" style="width: 100% ;"   (ngModelChange)="log1($event)">
+            <nz-option  *ngFor="let user of wilaya" nzLabel="{{user.mo3tamdeya}}" nzValue="{{user.mo3tamdeya}}"></nz-option>
+      
+          </nz-select>
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="العنوان">
+          <input type="text" nz-input  [(ngModel)]="adresseF" />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="الترقيم البريدي ">
+          <input type="text" nz-input  [(ngModel)]="CodePostal" />
+        </nz-input-group>
+      </div>
+      <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="الهاتف">
+            <input type="text" nz-input   [(ngModel)]="telephoneF" />
+          </nz-input-group>
+        </div>
+
+        <br>
+
+        <div>
+          <nz-input-group  nzAddOnAfter="الفاكس">
+            <input type="text" nz-input  [(ngModel)]="faxF"/>
+          </nz-input-group>
+        </div>
+
+        <br>
+
+    
+
+          <nz-input-group  nzAddOnAfter="الأمين">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="الأمين" [(ngModel)]="aminF" style="width: 100% ;"  (ngModelChange)="log2($event)">
+            <nz-option  *ngFor="let user of Users" nzLabel="{{user.email}}" nzValue="{{user.email}}"></nz-option>
+      
+          </nz-select>
+        </nz-input-group>
+
+        <br>
+        <div>
+       
+        
+        <nz-input-group  nzAddOnAfter="المسؤول">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="المسؤول" [(ngModel)]="responsableF" style="width: 100% ;"   (ngModelChange)="log1($event)">
+            <nz-option  *ngFor="let user of Users" nzLabel="{{user.email}}" nzValue="{{user.email}}"></nz-option>
+      
+          </nz-select>
+        </nz-input-group>
+      </div>
+       
+      </div>
+    <br>
+  </div>
+
+    <button mat-raised-button color="primary" (click)="updateMg()">تحيين</button>
+  
+</nz-modal>
+<ng-template #titleTemplate1>
+<div style="text-align: center;">تحيين مغازة</div>
+</ng-template>

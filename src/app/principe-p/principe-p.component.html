@@ -1,0 +1,379 @@
+<app-accueil></app-accueil>
+
+
+<div style="text-align: center;">  <br><br><u style="font-size: 35px;">الثوابت الرئيسية</u><br><br><br></div>
+<div style="background: #ECECEC; padding: 30px;">
+
+
+
+  <nz-row [nzGutter]="16" style="display: flex; justify-content: center;" >
+    
+    <nz-col [nzSpan]="6">
+      <nz-card (click)="toggle1=true;toggle2=false;toggle3=false">
+        <mat-icon  style="color:  #1A237E;" >apartment</mat-icon>&nbsp;<b  style="color:  #1A237E;">الوحدات</b>
+      </nz-card>
+    </nz-col>
+
+    <nz-col [nzSpan]="6">
+      <nz-card (click)="toggle2=true;toggle1=false;toggle3=false">
+        <mat-icon  style="color:  #1A237E;" >apartment</mat-icon>&nbsp;<b  style="color:  #1A237E;">الأصناف</b>
+      </nz-card>
+    </nz-col>
+
+
+    <nz-col [nzSpan]="6">
+      <nz-card (click)="toggle3=true;toggle1=false;toggle2=false">
+        <mat-icon  style="color:  #1A237E;" >apartment</mat-icon>&nbsp;<b  style="color:  #1A237E;">الأصناف الفرعية</b>
+      </nz-card>
+    </nz-col>
+
+
+
+
+  </nz-row>
+  <!-- ibra -->
+ 
+</div>
+<div style="background: #ECECEC; padding: 30px;">
+  <div style="text-align: center;">
+<div nz-col nzSpan="24" style="background: #ECECEC; padding: 30px;">
+ 
+      
+                <nz-input-group  nzAddOnAfter="بحث" >
+
+                   <input type="text"   [(ngModel)]="SearchF" nz-input/>
+                  </nz-input-group>
+                  <br>
+                  <br>
+  
+  <nz-table #basicTable1 [nzData]="uniteList" [nzPageSize]="4"  *ngIf="toggle1">
+    
+    <thead>
+      <h2 style="text-align: center;">الوحدات</h2>
+
+    <tr>
+      <th>حذف</th>
+      <th>تعديل</th>
+      <th>صنف</th>
+      <th>إسم الوحدة</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let data of basicTable1.data | filter:SearchF">
+
+      <td ><a nz-popconfirm nzPopconfirmTitle="هل أنت متأكد من الحذف" (nzOnConfirm)="deleteU(data.id)">
+        <span style="color: red ;" class="material-icons" >
+restore_from_trash
+</span></a></td>
+      <td >  <a  (click)="showModal122(data)"> <span style="color: red ;" class="material-icons" >
+        update
+        </span></a></td>
+        <td>{{data.type}}</td>
+      <td>{{data.nomUnite}}</td>
+
+
+
+    </tr>
+
+    </tbody>
+    <br>
+    <button nz-button nzType="default" (click)="showModal12()">إضافة</button><br><br><br><br>
+
+  </nz-table>&nbsp; 
+  
+  
+  <nz-table #basicTable2 [nzData]="listCategorie" [nzPageSize]="4"  *ngIf="toggle2" >
+
+    <thead>
+      <h2 style="text-align: center;">الأصناف</h2>
+
+    <tr>
+      <th>حذف</th>
+
+      <th>تعديل</th>
+      <th></th>
+
+      <th>اسم الصنف</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let data of basicTable2.data | filter:SearchF">
+     
+       <td ><a nz-popconfirm nzPopconfirmTitle="هل أنت متأكد من الحذف" (nzOnConfirm)="deleteCat(data.id)">
+          <span style="color: red ;" class="material-icons" >
+restore_from_trash
+</span></a></td>
+<td >  <a  (click)="showModal222(data)"> <span style="color: red ;" class="material-icons" >
+  update
+  </span></a></td>
+  <td></td>
+
+  <td>{{data.designation}}</td>
+
+ 
+    </tr>
+
+    </tbody>
+    <br>
+
+    <button nz-button nzType="default" (click)="showModal22()" >إضافة</button><br><br><br><br>
+
+  </nz-table>&nbsp;
+
+  <nz-table #basicTable3 [nzData]="ListSousCategorie" [nzPageSize]="4" *ngIf="toggle3"  >
+    
+    <thead>
+      <h2 style="text-align: center;">الأصناف الفرعية</h2>
+
+    <tr>
+
+      <th>حذف</th>
+      <th>تعديل</th>
+      <th>اسم الصنف الفرعي</th>
+
+      <th>صنف</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let data of basicTable3.data | filter:SearchF">
+      <td ><a nz-popconfirm nzPopconfirmTitle="هل أنت متأكد من الحذف" (nzOnConfirm)="deleteSousCat(data.id)">
+        <span style="color: red ;" class="material-icons" >
+restore_from_trash
+</span></a></td>
+      <td >  <a (click)="showModal323(data)" > <span style="color: red ;" class="material-icons" >
+        update
+        </span></a></td>
+        <td>{{data.categorie}}</td>
+
+        <td>{{data.designation}}</td>
+
+
+
+
+    </tr>
+
+    </tbody>
+    <br>
+
+    <button nz-button nzType="default" (click)="showModal23()">إضافة</button><br><br><br><br>
+
+  </nz-table>
+</div>
+  </div>
+</div>
+
+
+<!--<div style="display: flex; padding: 30px;">-->
+
+ 
+
+
+
+<!-- add -->
+<nz-modal [(nzVisible)]="isVisible12" [nzTitle]="titleTemplate" (nzOnCancel)="handleCancel12()" (nzOnOk)="handleOk12()" style="width: 100%; height: 30px;">
+
+  <div nz-row >
+    <div nz-col nzSpan="24" >
+      <div>
+        <nz-input-group  nzAddOnAfter="إسم الوحدة" >
+          <input type="text" nz-input [(ngModel)]="NomUnite"  />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="صنف">
+          <input type="text" nz-input [(ngModel)]="TypeU"  />
+        </nz-input-group>
+      </div>
+      <br>
+
+      <button nz-button nzType="default" (click)="handleOk12()">إضافة </button>
+
+
+
+
+
+    </div>
+    <div nz-col nzSpan="1"></div>
+
+    
+  </div>
+</nz-modal>
+<ng-template #titleTemplate>
+  <div style="text-align: center;">إضافة وحدة</div>
+</ng-template>
+
+
+
+
+<nz-modal [(nzVisible)]="isVisible22" [nzTitle]="titleTemplate2" (nzOnCancel)="handleCancel22()" (nzOnOk)="handleOk22()" style="width: 100%; text-align: center;">
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <div>
+        <p></p>
+        <nz-input-group nzAddOnAfter="اسم الصنف">
+          <input type="text" nz-input [(ngModel)]="catergorie" required />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <button nz-button nzType="default" (click)="handleOk22()">إضافة </button>
+    </div>
+  </div>
+</nz-modal>
+
+<ng-template #titleTemplate2>
+  <div style="text-align: center;">إضافة صنف</div>
+</ng-template>
+
+
+<nz-modal [(nzVisible)]="isVisible23" [nzTitle]="titleTemplate3" (nzOnCancel)="handleCancel23()" (nzOnOk)="handleOk23()" style="width: 100%; height: 30px;">
+
+  <div nz-row >
+    <div nz-col nzSpan="24" >
+      <div>
+        <p></p>
+
+
+
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="صنف" [(ngModel)]="designationSousCategorie" style="width: 100% ;"  >
+          <nz-option  *ngFor="let user of listCategorie" nzLabel="{{user.designation}}" nzValue="{{user.designation}}"></nz-option>
+    
+        </nz-select>
+      </div>
+
+
+      <br>
+
+      <div>
+        <p></p>
+        <nz-input-group  nzAddOnAfter=" صنف فرعي">
+          <input type="text" nz-input [(ngModel)]="CategorieS" required  />
+        </nz-input-group>
+      </div>
+
+      <br>
+      <button nz-button nzType="default" (click)="handleOk23()" >إضافة  </button>
+
+<br><br>
+      <nz-alert *ngIf="error" nzType="error" nzMessage="تحقق من العناصر !!"></nz-alert>
+      <nz-alert *ngIf="success" nzType="success" nzMessage="تمت الاضافة بنجاح !! "></nz-alert>
+
+    </div>
+
+  
+  </div>
+</nz-modal>
+<ng-template #titleTemplate3>
+  <div style="text-align: center;">إضافة صنف فرعي</div>
+</ng-template>
+
+
+
+<!--update-->
+  <nz-modal [(nzVisible)]="isVisible112" [nzTitle]="titleTemplate4" (nzOnCancel)="handleCancel122()" (nzOnOk)="handleOk122()" style="width: 100%; height: 30px;">
+
+  <div nz-row >
+    <div nz-col nzSpan="24" >
+      <div>
+        <nz-input-group  nzAddOnAfter="إسم الوحدة" >
+          <input type="text" nz-input [(ngModel)]="NomUnite"  />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <div>
+        <nz-input-group  nzAddOnAfter="صنف">
+          <input type="text" nz-input [(ngModel)]="TypeU"  />
+        </nz-input-group>
+      </div>
+      <br>
+
+      <button nz-button nzType="default" (click)="updateUnite()">تحيين </button>
+
+
+
+
+
+    </div>
+    <div nz-col nzSpan="1"></div>
+
+    
+  </div>
+</nz-modal>
+<ng-template #titleTemplate4>
+  <div style="text-align: center;">تحيين وحدة</div>
+</ng-template>
+
+
+<nz-modal [(nzVisible)]="isVisible222" [nzTitle]="titleTemplate5" (nzOnCancel)="handleCancel222()" (nzOnOk)="handleOk222()" style="width: 100%; text-align: center;">
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <div>
+        <p></p>
+        <nz-input-group nzAddOnAfter="اسم الصنف">
+          <input type="text" nz-input [(ngModel)]="catergorie" required />
+        </nz-input-group>
+      </div>
+
+      <br>
+
+      <button nz-button nzType="default" (click)="updatecat()">تحيين  </button>
+    </div>
+  </div>
+</nz-modal>
+
+<ng-template #titleTemplate5>
+  <div style="text-align: center;">تحيين صنف</div>
+</ng-template>
+
+
+<nz-modal [(nzVisible)]="isVisible323" [nzTitle]="titleTemplate6" (nzOnCancel)="handleCancel323()" (nzOnOk)="handleOk323()" style="width: 100%; height: 30px;">
+
+  <div nz-row >
+    <div nz-col nzSpan="24" >
+      <div>
+        <p></p>
+
+
+
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="صنف" [(ngModel)]="designationSousCategorie" style="width: 100% ;"  >
+          <nz-option  *ngFor="let user of listCategorie" nzLabel="{{user.designation}}" nzValue="{{user.designation}}"></nz-option>
+    
+        </nz-select>
+      </div>
+
+
+      <br>
+
+      <div>
+        <p></p>
+        <nz-input-group  nzAddOnAfter=" صنف فرعي">
+          <input type="text" nz-input [(ngModel)]="CategorieS" required  />
+        </nz-input-group>
+      </div>
+
+      <br>
+      <button nz-button nzType="default" (click)="updatesouscat()" >تحيين  </button>
+
+<br><br>
+      <nz-alert *ngIf="error" nzType="error" nzMessage="تحقق من العناصر !!"></nz-alert>
+      <nz-alert *ngIf="success" nzType="success" nzMessage="تمت  بنجاح !! "></nz-alert>
+
+    </div>
+
+  
+  </div>
+</nz-modal>
+<ng-template #titleTemplate6>
+  <div style="text-align: center;">تحيين صنف فرعي</div>
+</ng-template>

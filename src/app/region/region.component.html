@@ -1,0 +1,93 @@
+<app-accueil></app-accueil>
+
+
+<div style="text-align: center;" >  <br><br><u style="font-size: 35px;">الجهات</u><br><br><br></div>
+<div style="background: #ECECEC; padding: 30px;">
+
+  <nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="6">
+      <nz-card  (click)="showModal2()" >
+        <mat-icon  style="color:  #1A237E;" >apartment</mat-icon>&nbsp;<b  style="color:  #1A237E;">الولاية</b>
+      </nz-card>
+    </nz-col>
+    
+    <nz-col [nzSpan]="10">
+
+        
+  <div >
+    <input nz-input placeholder="بحث"  [(ngModel)]="term">
+</div>
+<br>
+      <nz-card   >
+        <nz-table #basicTable [nzData]="map">
+          <thead>
+            <tr>
+              <th><b> Designation</b> </th>
+              <th><b> Code </b></th>
+              <th><b> ولاية </b></th>
+              <th><b> معتمدية </b></th>
+              <th>Action</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data  | filter:term">
+              <td>{{data.designation}}</td>
+              <td>{{data.code}}</td>
+              <td>{{data.lieu}}</td>
+              <td>{{data.mo3tamdeya}}</td>
+       
+              <td >            <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="delete(data.id)">
+                <span style="color: red ;" class="material-icons" >
+  restore_from_trash
+  </span></a></td>
+         
+            </tr>
+          </tbody>
+        </nz-table>      </nz-card>
+    </nz-col>
+
+  </nz-row>
+</div>
+
+
+
+<nz-modal [(nzVisible)]="isVisible2" nzTitle="الولاية" (nzOnCancel)="handleCancel2()" (nzOnOk)="AjouterWilaya()" nzWidth="500px">
+  <div nz-col nzSpan="25">
+    <div>
+      <nz-input-group  nzAddOnAfter="رمز الولاية">
+        <input type="text" nz-input [(ngModel)]="code"  />
+      </nz-input-group>
+    </div>
+
+    <br>
+
+ 
+    <div>
+      <nz-input-group  nzAddOnAfter="ولاية">
+        <input type="text" id="localisation" nz-input/>
+      </nz-input-group>
+    </div>
+                <br>    
+
+
+ 
+                <div>
+                  <nz-input-group  nzAddOnAfter="معتمدية">
+                    <input type="text" [(ngModel)]="mo3tamdeya" nz-input/>
+                  </nz-input-group>
+                </div>
+                <br>    
+
+                <div>
+      <nz-input-group  nzAddOnAfter="Dèsignation">
+        <input type="text" [(ngModel)]="designation" nz-input/>
+      </nz-input-group>
+    </div>
+
+    <br>
+
+
+  </div>
+
+</nz-modal>
